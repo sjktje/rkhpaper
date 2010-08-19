@@ -4,6 +4,7 @@
 % Define command for printing the RKH logo
 \newcommand{\rkhlogo}{\includegraphics[width=12.46cm,height=2.7cm]{rkhlogo.pdf}}
 
+\def\subject{\gdef\@rkh@subject}
 \def\examinator{\gdef\@rkh@examinator}
 \def\tutor{\gdef\@rkh@tutor}
 
@@ -22,7 +23,12 @@
   \let \footnote \thanks
   \begin{flushleft}
   \rkhlogo \\ %Print out logo.
-  Omvårdnadsvetenskap \\
+  \ifdefined\@rkh@subject
+    \@rkh@subject\\
+  \else
+    \relax
+  \fi
+  %\ifdefined{@rkh@subject}{}{\@rkh@subject}\\
   15 hp, grundnivå \\
   Delkurs 5, 2010 \\ 
   \end{flushleft}
