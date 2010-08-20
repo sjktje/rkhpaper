@@ -25,6 +25,11 @@
 
 \newfloat{leftcorner}{b}
 
+% Redefine \and so that coauthors line up neatly.
+\def\and{%
+    \\ 
+    & }%
+
 \let\@rkh@maketitle=\maketitle
 
 \def\maketitle{%
