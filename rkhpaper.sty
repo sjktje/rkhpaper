@@ -2,6 +2,7 @@
 
 \usepackage{float}
 \usepackage{times}
+\usepackage{setspace}
 
 \ProvidesPackage{rkhpaper}
 \typeout{Using rkhpaper.sty (c) Svante Kvarnstrom <sjk@ankeborg.nu>}
@@ -34,6 +35,9 @@
 \def\and{%
     \\ 
     & }%
+
+% Line spacing should be 1.5 pt.
+\onehalfspacing
 
 % Now redefine \maketitle so that it builds our cover page the way
 % we want it to, including RKH logo et.c.
