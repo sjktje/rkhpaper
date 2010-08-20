@@ -47,6 +47,10 @@
   \let\footnoterule\relax
   \let \footnote \thanks
 
+  % We want no page number on title page.
+  \pagestyle{empty}
+  \setcounter{page}{0}
+
   \begin{flushleft}
   \rkhlogo \\ %Print out logo.
   \ifdefined\@rkh@subject
