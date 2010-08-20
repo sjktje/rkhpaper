@@ -9,6 +9,8 @@
 % Define command for printing the RKH logo
 \newcommand{\rkhlogo}{\includegraphics[width=12.46cm,height=2.7cm]{rkhlogo.pdf}}
 
+% Define commands for setting subject, examinator, tutor, points, 
+% level and course. 
 \def\subject{\gdef\@rkh@subject}
 \def\examinator{\gdef\@rkh@examinator}
 \def\tutor{\gdef\@rkh@tutor}
@@ -16,6 +18,7 @@
 \def\level{\gdef\@rkh@level}
 \def\course{\gdef\@rkh@course}
 
+% Define margins, et.c.
 \setlength{\topskip}{0mm}
 \setlength{\topmargin}{0mm}
 \setlength{\headheight}{0mm}
@@ -23,6 +26,8 @@
 \setlength{\hoffset}{-0.5in}
 \setlength{\voffset}{-0.5in}
 
+% Define a new float, leftcorner, where the author, tutor and examinator
+% information will shown.
 \newfloat{leftcorner}{b}
 
 % Redefine \and so that coauthors line up neatly.
@@ -30,8 +35,9 @@
     \\ 
     & }%
 
+% Now redefine \maketitle so that it builds our cover page the way
+% we want it to, including RKH logo et.c.
 \let\@rkh@maketitle=\maketitle
-
 \def\maketitle{%
   \let\footnotesize\small
   \let\footnoterule\relax
@@ -58,7 +64,7 @@
     {\LARGE \@title \par}%
     \vskip 3em%
       \vskip 1.5em%
-    {\large \@date \par}%       % Set date in \large size.
+    {\large \@date \par}%       
   \end{center}\par
   \begin{leftcorner}
     \begin{tabular}{ll}
