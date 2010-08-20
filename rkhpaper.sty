@@ -1,5 +1,7 @@
 % This file is copyright (c) 2010 Svante Kvarnström <sjk@ankeborg.nu>
 
+\usepackage{float}
+
 \ProvidesPackage{rkhpaper}
 \typeout{Using rkhpaper.sty (c) Svante Kvarnstrom <sjk@ankeborg.nu>}
 
@@ -9,6 +11,9 @@
 \def\subject{\gdef\@rkh@subject}
 \def\examinator{\gdef\@rkh@examinator}
 \def\tutor{\gdef\@rkh@tutor}
+\def\points{\gdef\@rkh@points}
+\def\level{\gdef\@rkh@level}
+\def\course{\gdef\@rkh@course}
 
 \setlength{\topskip}{0mm}
 \setlength{\topmargin}{0mm}
@@ -16,6 +21,8 @@
 \setlength{\headsep}{0mm}
 \setlength{\hoffset}{-0.5in}
 \setlength{\voffset}{-0.5in}
+
+\newfloat{leftcorner}{b}
 
 \let\@rkh@maketitle=\maketitle
 
@@ -28,21 +35,38 @@
   \ifdefined\@rkh@subject
     \@rkh@subject\\
   \fi
-  15 hp, grundnivå \\
-  Delkurs 5, 2010 \\ 
+  \ifdefined\@rkh@points
+    \@rkh@points hp
+    \ifdefined\@rkh@level
+        \@rkh@level\\
+    \else
+        \\
+    \fi
+  \fi
+  \ifdefined\@rkh@course
+    \@rkh@course, 2010 \\
+  \fi
   \end{flushleft}
 
   \begin{center}%
     {\LARGE \@title \par}%
     \vskip 3em%
-    {\large
-     \lineskip .75em%
-      \begin{tabular}[t]{c}%
-        \@author
-      \end{tabular}\par}%
       \vskip 1.5em%
     {\large \@date \par}%       % Set date in \large size.
   \end{center}\par
+  \begin{leftcorner}
+    \begin{tabular}{ll}
+    \ifdefined\@author
+        Författare: & \@author\\
+    \fi
+    \ifdefined\@rkh@tutor
+        Handledare: & \@rkh@tutor\\
+    \fi
+    \ifdefined\@rkh@examinator
+        Examinator: & \@rkh@examinator\\
+    \fi
+    \end{tabular}
+  \end{leftcorner}
   \@thanks
   \vfil\null
   \setcounter{footnote}{1}%
