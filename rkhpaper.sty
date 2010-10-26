@@ -7,6 +7,7 @@
 \ProvidesPackage{rkhpaper}
 \typeout{Using rkhpaper.sty (c) Svante Kvarnstrom <sjk@ankeborg.nu>}
 
+
 % Define command for printing the RKH logo
 \newcommand{\rkhlogo}{\includegraphics[width=12.46cm,height=2.7cm]{rkhlogo.pdf}}
 
@@ -39,16 +40,18 @@
 % Line spacing should be 1.5 pt.
 \onehalfspacing
 
+%\thispagestyle{empty}
+
 % Now redefine \maketitle so that it builds our cover page the way
 % we want it to, including RKH logo et.c.
 \let\@rkh@maketitle=\maketitle
 \def\maketitle{%
   \let\footnotesize\small
   \let\footnoterule\relax
-  \let \footnote \thanks
+%  \let \footnote \thanks
 
   % We want no page number on title page.
-  \pagestyle{empty}
+  \thispagestyle{empty}
   \setcounter{page}{0}
 
   \begin{flushleft}
@@ -88,7 +91,6 @@
 
   \@thanks
   \vfil\null
-  \setcounter{footnote}{1}%
   \global\let\thanks\relax
   \global\let\maketitle\relax
   \global\let\@thanks\@empty
@@ -102,3 +104,4 @@
   \@rkh@maketitle
 }
 
+\setcounter{page}{1}%
