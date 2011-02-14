@@ -3,6 +3,7 @@
 \usepackage{float}
 \usepackage{times}
 \usepackage{setspace}
+\usepackage{geometry} 
 
 \ProvidesPackage{rkhpaper}
 \typeout{Using rkhpaper.sty (c) Svante Kvarnstrom <sjk@ankeborg.nu>}
@@ -21,12 +22,12 @@
 \def\course{\gdef\@rkh@course}
 
 % Define margins, et.c.
-\setlength{\topskip}{0mm}
-\setlength{\topmargin}{0mm}
-\setlength{\headheight}{0mm}
-\setlength{\headsep}{0mm}
-\setlength{\hoffset}{-0.5in}
-\setlength{\voffset}{-0.5in}
+%\setlength{\topskip}{0mm}
+%\setlength{\topmargin}{0mm}
+%\setlength{\headheight}{0mm}
+%\setlength{\headsep}{0mm}
+%\setlength{\hoffset}{-0.5in}
+%\setlength{\voffset}{-0.5in}
 
 % Define a new float, leftcorner, where the author, tutor and examinator
 % information will shown.
@@ -46,6 +47,7 @@
 % we want it to, including RKH logo et.c.
 \let\@rkh@maketitle=\maketitle
 \def\maketitle{%
+  \newgeometry{top=0mm,hoffset=-0.5in,voffset=-0.5in}
   \let\footnotesize\small
   \let\footnoterule\relax
 %  \let \footnote \thanks
@@ -102,6 +104,8 @@
   \global\let\date\relax
   \global\let\and\relax
   \@rkh@maketitle
+
+  \restoregeometry
 }
 
 \setcounter{page}{1}%
