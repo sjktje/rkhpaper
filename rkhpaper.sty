@@ -3,11 +3,13 @@
 \usepackage{float}
 \usepackage{times}
 \usepackage{setspace}
-\usepackage{geometry} 
+\usepackage[absolute]{textpos}
+\usepackage{graphicx}
+\setlength{\TPHorizModule}{\paperwidth}\setlength{\TPVertModule}{\paperheight}
+
 
 \ProvidesPackage{rkhpaper}
 \typeout{Using rkhpaper.sty (c) Svante Kvarnstrom <sjk@ankeborg.nu>}
-
 
 % Define command for printing the RKH logo
 \newcommand{\rkhlogo}{\includegraphics[width=12.46cm,height=2.7cm]{rkhlogo.pdf}}
@@ -29,10 +31,6 @@
 %\setlength{\hoffset}{-0.5in}
 %\setlength{\voffset}{-0.5in}
 
-% Define a new float, leftcorner, where the author, tutor and examinator
-% information will shown.
-\newfloat{leftcorner}{b}
-
 % Redefine \and so that coauthors line up neatly.
 \def\and{%
     \\ 
@@ -47,49 +45,46 @@
 % we want it to, including RKH logo et.c.
 \let\@rkh@maketitle=\maketitle
 \def\maketitle{%
-  \newgeometry{top=0mm,hoffset=-0.5in,voffset=-0.5in}
-  \let\footnotesize\small
-  \let\footnoterule\relax
-%  \let \footnote \thanks
+	% We want no page number on title page.
+	\thispagestyle{empty}
+	\setcounter{page}{0}
+	
+	\begin{textblock}{0.8}[0,0](0.1,0.05)
+		\begin{flushleft}
+			\rkhlogo \\ %Print out logo.
+			\ifdefined\@rkh@subject
+				\@rkh@subject\\
+			\fi
+			\ifdefined\@rkh@points
+				\@rkh@points hp
+			\ifdefined\@rkh@level
+				\@rkh@level\\
+			\fi
+		  \fi
+		  \ifdefined\@rkh@course
+				\@rkh@course, \number\year\\
+		  \fi
+	  \end{flushleft}
+		
+	  \vspace{3cm}
+	  \begin{center}%
+		{\Large \@title \par}%
+	  \end{center}\par
+	\end{textblock}
 
-  % We want no page number on title page.
-  \thispagestyle{empty}
-  \setcounter{page}{0}
-
-  \begin{flushleft}
-  \rkhlogo \\ %Print out logo.
-  \ifdefined\@rkh@subject
-    \@rkh@subject\\
-  \fi
-  \ifdefined\@rkh@points
-    \@rkh@points hp
-    \ifdefined\@rkh@level
-        \@rkh@level\\
-    \fi
-  \fi
-  \ifdefined\@rkh@course
-    \@rkh@course, \number\year\\
-  \fi
-  \end{flushleft}
-
-  \vspace{3cm}
-  \begin{center}%
-    {\Large \@title \par}%
-  \end{center}\par
-
-  \begin{leftcorner}
-    \begin{tabular}{ll}
-    \ifdefined\@author
-        Författare: & \@author\\
-    \fi
-    \ifdefined\@rkh@tutor
-        Handledare: & \@rkh@tutor\\
-    \fi
-    \ifdefined\@rkh@examinator
-        Examinator: & \@rkh@examinator\\
-    \fi
-    \end{tabular}
-  \end{leftcorner}
+	\begin{textblock}{0.8}[0,1](0.1,0.7)
+		\begin{tabular}{ll}
+		\ifdefined\@author
+			Författare: & \@author\\
+		\fi
+		\ifdefined\@rkh@tutor
+			Handledare: & \@rkh@tutor\\
+		\fi
+		\ifdefined\@rkh@examinator
+			Examinator: & \@rkh@examinator\\
+		\fi
+		\end{tabular}
+  \end{textblock}
 
   \@thanks
   \vfil\null
@@ -104,8 +99,6 @@
   \global\let\date\relax
   \global\let\and\relax
   \@rkh@maketitle
-
-  \restoregeometry
 }
 
 \setcounter{page}{1}%
